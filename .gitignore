@@ -1,0 +1,1 @@
+*.pyc\n__pycache__\nmyvenv\ndb.sqlite3\n/static

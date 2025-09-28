@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+
+</head>
+<body>
+  {% extends "investing_logs/base.html" %}
+  {% block page_header %}
+  <h1>
+  <a href="{% url 'investing_logs:instrument' instrument.id %}">{{instrument}}</a>
+  </h1>
+  {% endblock page_header %}
+
+  {% block content %}
+  <br>
+  <p>添加笔记Add a new entry:</p>
+  <br>
+  <form action="{% url 'investing_logs:new_entry' instrument.id%}" method='post'>
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button name='submit'>添加Add entry</button>
+    </form>
+  {% endblock content %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="shortcut icon" href="#"/>
+</head>
+<body>
+  {% extends 'investing_logs/base.html' %}
+  {% block page_header %}
+     <h1>工具Instruments</h1>
+  {% endblock page_header %}
+
+  {% block content %}
+
+    <ul>
+      {% for instrument in instruments %}
+        <br>
+        <br>
+      <li class="list-group-item border-0">
+          <H1><a href="{% url 'investing_logs:instrument' instrument.id %}">  {{ instrument.text }}</a></H1>
+
+          <br>
+
+      </li>
+      {% empty %}
+        <li class="list-group-item border-0" >No topics have been added yet.</li>
+      {% endfor %}
+      </ul>
+      <br>
+       <H2><a href="{% url 'investing_logs:new_instrument' %}">添加工具Add a new instrument</a></H2>
+
+  {% endblock content %}
+
+
+</body>
+</html>

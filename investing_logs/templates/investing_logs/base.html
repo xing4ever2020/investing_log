@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=0.455, shrink-to-fit=no">
+  <title>Investing Log</title>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+ <link rel="shortcut icon" href="#"/>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="{% url 'investing_logs:index' %}">投资笔札InLog</a>
+      <button class="navbar-toggler" type="button" data-bstoggle="collapse"
+data-bs-target="#navbarCollapse" ariacontrols="navbarCollapse"aria-expanded="false" aria-label="Toggle
+navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+
+            <H1><a href="{% url 'investing_logs:instruments' %}">工具Instruments</a></H1> </li>
+        </ul> <!-- 定义导航栏左侧链接的代码到此结束 -->
+
+        <!-- 与账户相关的链接 -->
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <span class="navbar-text me-2">Hallo, {{user.username }}.
+            </span>
+          </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:register' %}"> 注册Register
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:login' %}">登录Login
+              </a>
+            </li>
+          {% endif %}
+
+        </ul> <!-- 与账户相关的链接到此结束 -->
+        {% if user.is_authenticated %}
+          <form action="{% url 'accounts:logout' %}" method='post'>
+            {% csrf_token %}
+            <button name='submit' class='btn btn-outlinesecondary btn-sm'>
+注销Log out</button>
+          </form>
+        {% endif %}
+
+
+
+
+      </div> <!-- 定义导航栏可折叠部分的代码到此结束 -->
+
+    </div> <!-- 定义导航栏容器的代码到此结束 -->
+  </nav> <!-- 定义导航栏的代码到此结束 -->
+  <main class="container">
+    <div class="pb-2 mb-2 border-bottom">
+{% block page_header %}{% endblock page_header %}
+    </div>
+    <div>
+      {% block content %}{% endblock content %}
+    </div>
+  </main>
+
+
+</body>
+</html>
